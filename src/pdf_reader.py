@@ -1,9 +1,10 @@
 import pypdf
+import pymupdf
 
 class PDFReader:
     def __init__(self, file_path):
         
-        self.pdf = pypdf.PdfReader(file_path)
+        self.pypdf = pypdf.PdfReader(file_path)
         self.file_path = file_path
         self.num_pages = 0
         self.has_ocr_layer = False
@@ -12,7 +13,7 @@ class PDFReader:
     
     def page_details(self, page_no):
 
-        page = self.pdf.get_page(page_no)
+        page = self.pypdf.get_page(page_no)
 
         hasOCR = True if page.extract_text() == True else False
 
@@ -22,7 +23,7 @@ class PDFReader:
         return {'OCR' : hasOCR}
     
     def get_metadata(self):
-        self.num_pages = self.pdf_reader.get_num_pages()
+        self.num_pages = self.pypdf.get_num_pages()
 
         return {
             'number_of_pages': self.num_pages,
@@ -40,7 +41,9 @@ class PDFReader:
         return dfs
 
 
+    def pymupdf_(self, page):
 
-
+        
+        doc = pymupdf.open(self.file_path)
 
 
