@@ -44,6 +44,8 @@ class PDFReader:
     def pymupdf_(self, page):
 
         
-        doc = pymupdf.open(self.file_path)
+        page = pymupdf.open(self.file_path)[page]\
+        
+        tabs = page.find_tables()
 
 
